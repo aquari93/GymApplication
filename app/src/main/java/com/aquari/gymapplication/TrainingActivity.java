@@ -69,4 +69,14 @@ public class TrainingActivity extends AppCompatActivity implements PlanDetailDia
             startActivity(intent);
         }
     }
+
+
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+
+    }
 }

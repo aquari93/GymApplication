@@ -2,6 +2,7 @@ package com.aquari.gymapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -20,6 +21,7 @@ public class PlanActivity extends AppCompatActivity {
     private RelativeLayout noPlanRelLayout;
     private NestedScrollView nestedScrollView;
     private Button btnAddPlan;
+    private PlanAdapter mondayAdapter, tuesdayAdapter, wednesdayAdapter,thursdayAdapter, fridayAdapter , saturdayAdapter, sundayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,10 @@ public class PlanActivity extends AppCompatActivity {
             if(plans.size()>0){
                 noPlanRelLayout.setVisibility(View.GONE);
                 nestedScrollView.setVisibility(View.VISIBLE);
+
+                initRecView();
+
+                setEditOnClickListener();
 
             }
             else{
@@ -57,6 +63,115 @@ public class PlanActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void setEditOnClickListener() {
+        Intent intent = new Intent(this, EditActivity.class);
+        mondayEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("day","Monday");
+                startActivity(intent);
+            }
+        });
+
+        tuesdayEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("day","Tuesday");
+                startActivity(intent);
+            }
+        });
+
+        wednesdayEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("day","Wednesday");
+                startActivity(intent);
+            }
+        });
+
+        thursdayEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("day","Thursday");
+                startActivity(intent);
+            }
+        });
+
+        fridayEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("day","Friday");
+                startActivity(intent);
+            }
+        });
+
+        saturdayEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("day","Saturday");
+                startActivity(intent);
+
+            }
+        });
+
+        sundayEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("day","Sunday");
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void initRecView() {
+        mondayAdapter=new PlanAdapter(this);
+        mondayRecView.setAdapter(mondayAdapter);
+        mondayRecView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false));
+        mondayAdapter.setPlans((getPlansByDay("Monday")));
+
+        tuesdayAdapter=new PlanAdapter(this);
+        tuesdayRecView.setAdapter(tuesdayAdapter);
+        tuesdayRecView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false));
+        tuesdayAdapter.setPlans((getPlansByDay("Tuesday")));
+
+        wednesdayAdapter=new PlanAdapter(this);
+        wednesdayRecView.setAdapter(wednesdayAdapter);
+        wednesdayRecView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false));
+        wednesdayAdapter.setPlans((getPlansByDay("Wednesday")));
+
+        thursdayAdapter=new PlanAdapter(this);
+        thursdayRecView.setAdapter(thursdayAdapter);
+        thursdayRecView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false));
+        thursdayAdapter.setPlans((getPlansByDay("Thursday")));
+
+        fridayAdapter=new PlanAdapter(this);
+        fridayRecView.setAdapter(fridayAdapter);
+        fridayRecView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false));
+        fridayAdapter.setPlans((getPlansByDay("Friday")));
+
+        saturdayAdapter=new PlanAdapter(this);
+        saturdayRecView.setAdapter(saturdayAdapter);
+        saturdayRecView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false));
+        saturdayAdapter.setPlans((getPlansByDay("Saturday")));
+
+        sundayAdapter=new PlanAdapter(this);
+        sundayRecView.setAdapter(sundayAdapter);
+        sundayRecView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false));
+        sundayAdapter.setPlans((getPlansByDay("Sunday")));
+    }
+
+    private ArrayList<Plan> getPlansByDay(String day){
+        ArrayList<Plan> allPlans = Utils.getPlans();
+        ArrayList<Plan> plans = new ArrayList<>();
+        for(Plan p: allPlans){
+            if(p.getDay().equalsIgnoreCase(day)){
+                plans.add(p);
+
+            }
+        }
+        return plans;
     }
 
     private void initViews() {

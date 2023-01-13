@@ -6,7 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp"
     app:cardCornerRadius="5dp"
-    app:cardElevation="5dp">
+    app:cardElevation="5dp"
+    android:id="@+id/parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -58,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/trainingImage"
             android:layout_marginStart="5dp"
+            android:id="@+id/txtTime"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@id/txtTimeDescription"
             android:text="minutes"/>

@@ -18,7 +18,13 @@ private Button btnPlans, btnAllTrainings, btnAbout;
         initView();
         Utils.initTrainings();
 
-        //TODO Create onClickListeners
+        btnPlans.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,PlanActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnAllTrainings.setOnClickListener(new View.OnClickListener() {
             @Override

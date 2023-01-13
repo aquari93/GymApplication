@@ -49,6 +49,10 @@ public class Utils {
         return plans.add(plan);
     }
 
+    public static boolean removePlan(Plan plan){
+        return plans.remove(plan);
+    }
+
     public static ArrayList<Plan> getPlans() {
         return plans;
     }
